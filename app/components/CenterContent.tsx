@@ -33,6 +33,9 @@ export default function CenterContent({ children }: { children: React.ReactNode 
   const rotateY = useTransform(springX, [-0.5, 0.5], [-2, 2]);
 
   const handleMouseMove = (e: React.MouseEvent) => {
+    // Disable tilt on mobile/touch screens
+    if (window.innerWidth < 1024 || window.matchMedia('(hover: none)').matches) return;
+    
     const { clientX, clientY } = e;
     const { innerWidth, innerHeight } = window;
     mouseX.set(clientX / innerWidth - 0.5);

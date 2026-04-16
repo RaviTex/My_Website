@@ -37,13 +37,13 @@ export default function About() {
 
       <motion.h1
         variants={itemVariants}
-        className="text-6xl md:text-7xl font-bold text-white tracking-tight mb-3 leading-none"
+        className="text-5xl sm:text-6xl md:text-7xl font-bold text-white tracking-tight mb-3 leading-none break-words"
         style={{ textShadow: '0 0 30px rgba(255,255,255,0.15), 0 2px 10px rgba(0,0,0,0.8)' }}
       >
         Raphael Platzer.
       </motion.h1>
 
-      <motion.h2 variants={itemVariants} className="text-4xl md:text-5xl font-bold text-slate-400 mb-7 tracking-tight leading-tight">
+      <motion.h2 variants={itemVariants} className="text-3xl sm:text-4xl md:text-5xl font-bold text-slate-400 mb-7 tracking-tight leading-tight break-words">
         I build interactive systems.
       </motion.h2>
 

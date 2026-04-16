@@ -28,7 +28,7 @@ export default function BeaverGame() {
             
             <button
               onClick={() => setIsPlaying(true)}
-              className="px-10 py-5 rounded-2xl border border-[#64ffda]/40 bg-[#0a0f16]/60 backdrop-blur-md text-[#64ffda] uppercase font-mono text-lg tracking-widest hover:bg-[#64ffda]/15 hover:border-[#64ffda] hover:scale-105 transition-all duration-300 z-10 shadow-[0_0_30px_rgba(100,255,218,0.15)]"
+              className="hidden lg:block px-10 py-5 rounded-2xl border border-[#64ffda]/40 bg-[#0a0f16]/60 backdrop-blur-md text-[#64ffda] uppercase font-mono text-lg tracking-widest hover:bg-[#64ffda]/15 hover:border-[#64ffda] hover:scale-105 transition-all duration-300 z-10 shadow-[0_0_30px_rgba(100,255,218,0.15)]"
             >
               Play
             </button>

@@ -25,7 +25,7 @@ export default function Contact() {
         04. What&apos;s Next?
       </motion.p>
       
-      <motion.h1 variants={itemVariants} className="text-5xl md:text-6xl font-bold text-white tracking-tight mb-8" style={{ textShadow: '0 0 20px rgba(255,255,255,0.1)' }}>
+      <motion.h1 variants={itemVariants} className="text-4xl sm:text-5xl md:text-6xl font-bold text-white tracking-tight mb-8 break-words" style={{ textShadow: '0 0 20px rgba(255,255,255,0.1)' }}>
         Get In Touch
       </motion.h1>
 

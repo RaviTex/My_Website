@@ -4,6 +4,7 @@ import { NavigationProvider } from '../context/NavigationContext';
 import GalaxyCanvas from './GalaxyCanvas';
 import SidePanels from './SidePanels';
 import CenterContent from './CenterContent';
+import MobileNav from './MobileNav';
 import { useState, useEffect } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 
@@ -78,6 +79,9 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
         <div className="absolute inset-0 z-[-10]">
           <GalaxyCanvas />
         </div>
+
+        {/* Mobile Navigation overlay — visible on small screens */}
+        <MobileNav />
 
         {/* Side panels — always in DOM, update their content per route */}
         <SidePanels />

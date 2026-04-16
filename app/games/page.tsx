@@ -10,14 +10,14 @@ export default function GamesPage() {
     <div className="flex flex-col items-center justify-start w-full max-w-6xl mx-auto h-full px-8 py-12 gap-24">
       {/* Introduction */}
       <div className="text-center w-full max-w-3xl pt-12">
-        <h1 className="text-5xl md:text-6xl font-bold mb-4 text-white uppercase tracking-tighter">
+        <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-4 text-white uppercase tracking-tighter break-words">
           Games
         </h1>
       </div>
 
       {/* Beaver Delivery Section */}
       <div className="w-full flex flex-col items-center">
-        <h2 className="text-3xl md:text-4xl font-bold text-white mb-8 font-mono tracking-tighter text-center uppercase">
+        <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-8 font-mono tracking-tighter text-center uppercase break-words">
           <span className="text-[#64ffda]/40">[</span> Beaver Delivery <span className="text-[#64ffda]/40">]</span>
         </h2>
         <BeaverGame />
@@ -25,7 +25,7 @@ export default function GamesPage() {
 
       {/* Web Them All Section */}
       <div className="w-full max-w-4xl flex flex-col items-center pb-24">
-        <h2 className="text-3xl md:text-4xl font-bold text-white mb-6 font-mono tracking-tighter uppercase">
+        <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-6 font-mono tracking-tighter uppercase text-center break-words">
           <span className="text-[#64ffda]/40">[</span> Web Them All <span className="text-[#64ffda]/40">]</span>
         </h2>
         <div className="w-full h-64 border border-dashed border-[#64ffda]/20 rounded-2xl flex items-center justify-center bg-[#0d0f16]/50 mb-8">
