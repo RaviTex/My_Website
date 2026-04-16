@@ -14,12 +14,13 @@ const itemVariants = {
 
 export default function Contact() {
   return (
-    <motion.div
-      variants={containerVariants}
-      initial="hidden"
-      animate="visible"
-      className="flex flex-col items-center px-8 lg:px-16 py-16 max-w-2xl mx-auto w-full text-center justify-center min-h-full"
-    >
+    <div className="flex flex-col items-center justify-center min-h-full w-full p-4 sm:p-8">
+      <motion.div
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+        className="flex flex-col items-center p-8 sm:p-12 backdrop-blur-md bg-[#0A0B10]/60 border border-white/10 rounded-3xl shadow-[0_0_40px_rgba(0,0,0,0.5)] max-w-2xl w-full sm:w-auto text-center"
+      >
       <motion.p variants={itemVariants} className="text-[#64ffda] font-mono text-[14px] mb-4 tracking-wider uppercase flex justify-center w-full">
         04. What&apos;s Next?
       </motion.p>
@@ -134,6 +135,7 @@ export default function Contact() {
         </div>
 
       </motion.div>
-    </motion.div>
+      </motion.div>
+    </div>
   );
 }

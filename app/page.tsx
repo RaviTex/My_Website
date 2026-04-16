@@ -17,12 +17,13 @@ export default function Home() {
   const { navigate } = useNavigation();
 
   return (
-    <motion.div
-      variants={containerVariants}
-      initial="hidden"
-      animate="visible"
-      className="flex flex-col items-start px-8 lg:px-16 py-16 max-w-2xl mx-auto w-full text-left justify-center min-h-full"
-    >
+    <div className="flex flex-col items-center justify-center min-h-full w-full p-4 sm:p-8">
+      <motion.div
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+        className="flex flex-col items-start p-8 sm:p-12 backdrop-blur-md bg-[#0A0B10]/60 border border-white/10 rounded-3xl shadow-[0_0_40px_rgba(0,0,0,0.5)] max-w-2xl w-full sm:w-auto text-left"
+      >
       <motion.p variants={itemVariants} className="text-[#64ffda] font-mono text-[15px] mb-5 tracking-wide">
         Hi, my name is
       </motion.p>
@@ -52,5 +53,6 @@ export default function Home() {
         </button>
       </motion.div>
     </motion.div>
+    </div>
   );
 }
