@@ -22,7 +22,17 @@ export default function About() {
         className="flex flex-col items-start p-8 sm:p-12 backdrop-blur-md bg-[#0A0B10]/60 border border-white/10 rounded-3xl shadow-[0_0_40px_rgba(0,0,0,0.5)] max-w-3xl w-full sm:w-auto text-left"
       >
       <motion.p variants={itemVariants} className="text-[#64ffda] font-mono text-[14px] mb-4 tracking-wider uppercase flex justify-center w-full">
-        01. Hi, my name is
+        <motion.span 
+          initial="hidden" 
+          animate="visible" 
+          variants={{ visible: { transition: { staggerChildren: 0.05, delayChildren: 0.6 } } }}
+        >
+          {"01. Hi, my name is".split("").map((c, i) => (
+             <motion.span key={i} variants={{ hidden: { opacity: 0 }, visible: { opacity: 1 } }}>
+               {c === " " ? "\u00A0" : c}
+             </motion.span>
+          ))}
+        </motion.span>
       </motion.p>
 
       <motion.h1
