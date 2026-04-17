@@ -61,8 +61,8 @@ export default function CenterContent({ children }: { children: React.ReactNode 
           initial="enter"
           animate="center"
           exit="exit"
-          transition={{ duration: 0.8, ease: [0.77, 0, 0.17, 1] }}
-          className="absolute inset-0 flex flex-col items-center justify-center w-full h-full overflow-y-auto no-scrollbar"
+          transition={{ duration: 0.45, ease: [0.77, 0, 0.17, 1] }}
+          className="absolute inset-0 flex flex-col items-center w-full h-full overflow-y-auto no-scrollbar"
           style={{ 
             transformStyle: 'preserve-3d', 
             transformOrigin: 'center center -500px',

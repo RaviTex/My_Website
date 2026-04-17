@@ -14,12 +14,12 @@ const itemVariants = {
 
 export default function About() {
   return (
-    <div className="flex flex-col items-center justify-center min-h-full w-full p-4 sm:p-8">
+    <div className="flex flex-col items-center min-h-full w-full p-4 py-24 sm:p-8">
       <motion.div
         variants={containerVariants}
         initial="hidden"
         animate="visible"
-        className="flex flex-col items-start p-8 sm:p-12 backdrop-blur-md bg-[#0A0B10]/60 border border-white/10 rounded-3xl shadow-[0_0_40px_rgba(0,0,0,0.5)] max-w-3xl w-full sm:w-auto text-left"
+        className="m-auto flex flex-col items-start p-8 sm:p-12 backdrop-blur bg-[#0A0B10]/50 border border-white/10 rounded-3xl shadow-[0_0_40px_rgba(0,0,0,0.4)] max-w-3xl w-full sm:w-auto text-left"
       >
       <motion.p variants={itemVariants} className="text-[#64ffda] font-mono text-[14px] mb-4 tracking-wider uppercase flex justify-center w-full">
         <motion.span 
