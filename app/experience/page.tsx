@@ -19,10 +19,20 @@ export default function Experience() {
         variants={containerVariants}
         initial="hidden"
         animate="visible"
-        className="flex flex-col items-start p-8 sm:p-12 backdrop-blur-md bg-[#0A0B10]/60 border border-white/10 rounded-3xl shadow-[0_0_40px_rgba(0,0,0,0.5)] max-w-3xl w-full sm:w-auto text-left"
+        className="flex flex-col items-start p-8 sm:p-12 backdrop-blur-md bg-[#0A0B10]/70 border border-white/10 rounded-3xl shadow-[0_0_40px_rgba(0,0,0,0.5)] max-w-3xl w-full sm:w-auto text-left"
       >
       <motion.p variants={itemVariants} className="text-[#64ffda] font-mono text-[14px] mb-4 tracking-wider uppercase flex justify-center w-full">
-        03. My Journey
+        <motion.span 
+          initial="hidden" 
+          animate="visible" 
+          variants={{ visible: { transition: { staggerChildren: 0.05, delayChildren: 0.6 } } }}
+        >
+          {"02. My Journey".split("").map((c, i) => (
+             <motion.span key={i} variants={{ hidden: { opacity: 0 }, visible: { opacity: 1 } }}>
+               {c === " " ? "\u00A0" : c}
+             </motion.span>
+          ))}
+        </motion.span>
       </motion.p>
       
       <motion.h1 variants={itemVariants} className="text-4xl md:text-5xl font-bold text-white tracking-tight mb-12" style={{ textShadow: '0 0 20px rgba(255,255,255,0.1)' }}>

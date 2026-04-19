@@ -16,7 +16,7 @@ interface NavLinkDef {
   isBack?: boolean;
 }
 
-function LeftNavItem({ item, index, total }: { item: NavLinkDef; index: number; total: number }) {
+function LeftNavItem({ item, index, total, isActive }: { item: NavLinkDef; index: number; total: number; isActive: boolean }) {
   const { navigate } = useNavigation();
   const skew = calcSkewLeft(index, total, MAX_SKEW);
   
@@ -44,26 +44,26 @@ function LeftNavItem({ item, index, total }: { item: NavLinkDef; index: number; 
       animate={{ opacity: 1, x: 0, skewY: skew, transition: { delay: 0.2 + index * 0.1, duration: 0.55, ease: 'easeOut' } }}
       exit={{ opacity: 0, x: -20, transition: { duration: 0.15 } }}
       whileHover={{ scale: 1.05, skewY: skew, textShadow: '0 0 15px rgba(100, 255, 218, 0.7), 0 0 30px rgba(100, 255, 218, 0.4)', transition: { duration: 0.3 } }}
-      className="group flex items-center justify-start gap-4 w-full text-[17px] font-light tracking-wide py-5 px-8 mb-2 text-slate-300 transition-colors duration-300 cursor-pointer hover:text-white"
+      className={`group flex items-center justify-start gap-4 w-full text-[17px] tracking-wide py-5 px-8 mb-2 transition-colors duration-300 cursor-pointer ${isActive ? 'text-[#64ffda] font-medium' : 'text-slate-300 font-light hover:text-white'}`}
     >
       <motion.div style={{ x: springX, y: springY, z: 1 }} className="flex items-center gap-4" ref={innerRef}>
         {item.isBack ? (
           <motion.span
-            className="text-slate-500 group-hover:text-[#64ffda] text-lg leading-none inline-flex items-center transform -translate-y-[2px]"
-            variants={{ hover: { x: -4, transition: { duration: 0.3 } } }}
+            className={`text-lg leading-none inline-flex items-center transform -translate-y-[2px] transition-colors ${isActive ? 'text-[#64ffda]' : 'text-slate-500 group-hover:text-[#64ffda]'}`}
+            variants={!isActive ? { hover: { x: -4, transition: { duration: 0.3 } } } : undefined}
           >‹</motion.span>
         ) : (
-          <span className="text-[#64ffda]/80 font-mono text-[14px] tracking-normal leading-none inline-flex items-center transform -translate-y-[1px]">
+          <span className={`font-mono text-[14px] tracking-normal leading-none inline-flex items-center transform -translate-y-[1px] transition-colors ${isActive ? 'text-[#64ffda]' : 'text-[#64ffda]/80'}`}>
             0{index + 1}.
           </span>
         )}
-        <span className="relative z-10 leading-none">{item.label}</span>
+        <span className={`relative z-10 leading-none transition-colors ${isActive ? 'text-white font-medium' : 'text-slate-300 group-hover:text-white'}`}>{item.label}</span>
       </motion.div>
     </motion.div>
   );
 }
 
-function RightNavItem({ item, index, total }: { item: NavLinkDef; index: number; total: number }) {
+function RightNavItem({ item, index, total, isActive }: { item: NavLinkDef; index: number; total: number; isActive: boolean }) {
   const { navigate } = useNavigation();
   const skew = calcSkewRight(index, total, MAX_SKEW * 0.6);
   
@@ -91,13 +91,13 @@ function RightNavItem({ item, index, total }: { item: NavLinkDef; index: number;
       animate={{ opacity: 1, x: 0, skewY: skew, transition: { delay: 0.8 + index * 0.15, duration: 0.6, ease: 'easeOut' } }}
       exit={{ opacity: 0, x: 20, transition: { duration: 0.15 } }}
       whileHover={{ scale: 1.05, skewY: skew, textShadow: '0 0 15px rgba(100, 255, 218, 0.7), 0 0 30px rgba(100, 255, 218, 0.4)', transition: { duration: 0.3 } }}
-      className="group flex items-center justify-start gap-4 w-full text-[17px] font-light tracking-wide py-5 px-8 mb-2 text-slate-300 transition-colors duration-300 cursor-pointer hover:text-white"
+      className={`group flex items-center justify-start gap-4 w-full text-[17px] tracking-wide py-5 px-8 mb-2 transition-colors duration-300 cursor-pointer ${isActive ? 'text-[#64ffda] font-medium' : 'text-slate-300 font-light hover:text-white'}`}
     >
       <motion.div style={{ x: springX, y: springY, z: 1 }} className="flex items-center gap-4" ref={innerRef}>
-        <span className="relative z-10 leading-none">{item.label}</span>
+        <span className={`relative z-10 leading-none transition-colors ${isActive ? 'text-white font-medium' : 'text-slate-300 group-hover:text-white'}`}>{item.label}</span>
         <motion.span
-          className="text-slate-500 group-hover:text-[#64ffda] text-lg leading-none inline-flex items-center transform -translate-y-[2px]"
-          variants={{ hover: { x: 4, transition: { duration: 0.3 } } }}
+          className={`text-lg leading-none inline-flex items-center transform -translate-y-[2px] transition-colors ${isActive ? 'text-[#64ffda]' : 'text-slate-500 group-hover:text-[#64ffda]'}`}
+          variants={!isActive ? { hover: { x: 4, transition: { duration: 0.3 } } } : undefined}
         >›</motion.span>
       </motion.div>
     </motion.div>
@@ -151,9 +151,10 @@ export default function SidePanels() {
         style={{ width: '400px' }}
       >
         <div className="flex flex-col">
-          {leftItems.map((item, i) => (
-            <LeftNavItem key={item.label} item={item} index={i} total={leftItems.length} />
-          ))}
+          {leftItems.map((item, i) => {
+            const isActive = pathname === item.href || pathname.startsWith(item.href + '/');
+            return <LeftNavItem key={item.label} item={item} index={i} total={leftItems.length} isActive={isActive} />;
+          })}
         </div>
       </div>
 
@@ -163,9 +164,10 @@ export default function SidePanels() {
         style={{ width: '400px' }}
       >
         <div className="flex flex-col">
-          {rightItems.map((item, i) => (
-            <RightNavItem key={item.label} item={item} index={i} total={rightItems.length} />
-          ))}
+          {rightItems.map((item, i) => {
+            const isActive = pathname === item.href || pathname.startsWith(item.href + '/');
+            return <RightNavItem key={item.label} item={item} index={i} total={rightItems.length} isActive={isActive} />;
+          })}
         </div>
       </div>
     </>

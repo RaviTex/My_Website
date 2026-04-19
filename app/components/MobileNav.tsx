@@ -3,10 +3,12 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigation, NavDirection } from '../context/NavigationContext';
+import { usePathname } from 'next/navigation';
 
 export default function MobileNav() {
   const [isOpen, setIsOpen] = useState(false);
   const { navigate } = useNavigation();
+  const pathname = usePathname();
 
   const handleNav = (href: string, dir: NavDirection) => {
     setIsOpen(false);
@@ -67,19 +69,25 @@ export default function MobileNav() {
               transition={{ delay: 0.1, duration: 0.5, ease: 'easeOut' }}
               className="flex flex-col items-center gap-8 w-full max-w-sm relative"
             >
-              {navItems.map((item, index) => (
-                <motion.button
-                  key={item.label}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.15 + index * 0.1, duration: 0.4, ease: 'easeOut' }}
-                  onClick={() => handleNav(item.href, item.dir)}
-                  className="w-full text-3xl md:text-4xl font-bold text-slate-300 relative py-4 active:scale-95 transition-transform flex justify-center items-center"
-                >
-                  <span className="absolute left-0 text-[#64ffda]/40 font-mono text-sm tracking-widest">{`0${index + 1}.`}</span>
-                  <span className="tracking-wide">{item.label}</span>
-                </motion.button>
-              ))}
+              {navItems.map((item, index) => {
+                const isActive = pathname === item.href || pathname.startsWith(item.href + '/');
+                return (
+                  <motion.button
+                    key={item.label}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.15 + index * 0.1, duration: 0.4, ease: 'easeOut' }}
+                    onClick={() => handleNav(item.href, item.dir)}
+                    className={`w-full text-3xl md:text-4xl relative py-4 active:scale-95 transition-all flex justify-center items-center ${isActive ? 'font-bold text-white' : 'font-medium text-slate-300'}`}
+                    style={isActive ? { textShadow: '0 0 15px rgba(255, 255, 255, 0.3)' } : undefined}
+                  >
+                    <span className={`absolute left-0 font-mono text-sm tracking-widest transition-colors ${isActive ? 'text-[#64ffda]' : 'text-[#64ffda]/40'}`}>
+                      {`0${index + 1}.`}
+                    </span>
+                    <span className="tracking-wide">{item.label}</span>
+                  </motion.button>
+                );
+              })}
             </motion.div>
           </motion.div>
         )}

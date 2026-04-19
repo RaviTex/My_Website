@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from "framer-motion";
+import { useState } from "react";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -13,16 +14,43 @@ const itemVariants = {
 };
 
 export default function Contact() {
+  const [copiedPhone, setCopiedPhone] = useState(false);
+
+  const handlePhoneAction = () => {
+    const phoneNumber = "+43 664 754 858 24";
+    const cleanNumber = "+4366475485824";
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+    
+    if (isMobile) {
+      window.location.href = `tel:${cleanNumber}`;
+    } else {
+      navigator.clipboard.writeText(phoneNumber).then(() => {
+        setCopiedPhone(true);
+        setTimeout(() => setCopiedPhone(false), 2000);
+      });
+    }
+  };
+
   return (
     <div className="flex flex-col items-center min-h-full w-full p-4 py-24 sm:p-8">
       <motion.div
         variants={containerVariants}
         initial="hidden"
         animate="visible"
-        className="m-auto flex flex-col items-center p-8 sm:p-12 backdrop-blur bg-[#0A0B10]/50 border border-white/10 rounded-3xl shadow-[0_0_40px_rgba(0,0,0,0.4)] max-w-2xl w-full sm:w-auto text-center"
+        className="m-auto flex flex-col items-center p-8 sm:p-12 backdrop-blur-md bg-[#0A0B10]/70 border border-white/10 rounded-3xl shadow-[0_0_40px_rgba(0,0,0,0.5)] max-w-2xl w-full sm:w-auto text-center"
       >
       <motion.p variants={itemVariants} className="text-[#64ffda] font-mono text-[14px] mb-4 tracking-wider uppercase flex justify-center w-full">
-        04. What&apos;s Next?
+        <motion.span 
+          initial="hidden" 
+          animate="visible" 
+          variants={{ visible: { transition: { staggerChildren: 0.05, delayChildren: 0.6 } } }}
+        >
+          {"04. What's Next?".split("").map((c, i) => (
+             <motion.span key={i} variants={{ hidden: { opacity: 0 }, visible: { opacity: 1 } }}>
+               {c === " " ? "\u00A0" : c}
+             </motion.span>
+          ))}
+        </motion.span>
       </motion.p>
       
       <motion.h1 variants={itemVariants} className="text-4xl sm:text-5xl md:text-6xl font-bold text-white tracking-tight mb-8 break-words" style={{ textShadow: '0 0 20px rgba(255,255,255,0.1)' }}>
@@ -72,15 +100,26 @@ export default function Contact() {
         {/* Tier 2: Details */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full">
           {/* Phone */}
-          <div className="flex items-center justify-between p-5 rounded-2xl border border-slate-700/50 bg-slate-800/20 hover:bg-slate-800/40 transition-colors">
+          <button 
+            onClick={handlePhoneAction}
+            className="flex items-center justify-between p-5 rounded-2xl border border-slate-700/50 bg-slate-800/20 hover:bg-slate-800/40 transition-colors group text-left cursor-pointer"
+          >
             <div className="flex flex-col items-start gap-1">
-              <span className="text-xs text-slate-500 font-mono uppercase tracking-widest">Phone</span>
-              <span className="text-slate-300">+43 664 754 858 24</span>
+              <span className={`text-xs font-mono uppercase tracking-widest transition-colors ${copiedPhone ? "text-[#64ffda]" : "text-slate-500 group-hover:text-slate-400"}`}>
+                {copiedPhone ? "Copied!" : "Phone"}
+              </span>
+              <span className={`transition-colors ${copiedPhone ? "text-white" : "text-slate-300"}`}>+43 664 754 858 24</span>
             </div>
-            <svg className="w-5 h-5 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
-            </svg>
-          </div>
+            {copiedPhone ? (
+               <svg className="w-5 h-5 text-[#64ffda]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
+               </svg>
+            ) : (
+              <svg className="w-5 h-5 text-slate-500 group-hover:text-slate-400 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+              </svg>
+            )}
+          </button>
 
           {/* Location */}
           <div className="flex items-center justify-between p-5 rounded-2xl border border-slate-700/50 bg-slate-800/20 hover:bg-slate-800/40 transition-colors">

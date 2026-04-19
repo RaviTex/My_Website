@@ -3,6 +3,11 @@ import { motion } from 'framer-motion';
 import { useState } from 'react';
 import BeaverGame from '../components/BeaverGame';
 
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" as const } },
+};
+
 export default function GamesPage() {
   const [isPlayingBeaver, setIsPlayingBeaver] = useState(false);
 
@@ -12,18 +17,32 @@ export default function GamesPage() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5 }}
-        className="m-auto flex flex-col items-center justify-start w-full max-w-5xl px-4 py-12 sm:px-8 sm:py-16 gap-24 backdrop-blur bg-[#0A0B10]/50 border border-white/10 rounded-3xl shadow-[0_0_40px_rgba(0,0,0,0.4)]"
+        className="m-auto flex flex-col items-center justify-start w-full max-w-5xl px-4 py-8 sm:px-8 sm:py-12 gap-12 backdrop-blur-md bg-[#0A0B10]/70 border border-white/10 rounded-3xl shadow-[0_0_40px_rgba(0,0,0,0.5)]"
       >
+        <motion.p variants={itemVariants} className="text-[#64ffda] font-mono text-[14px] mb-2 tracking-wider uppercase flex justify-center w-full">
+          <motion.span 
+            initial="hidden" 
+            animate="visible" 
+            variants={{ visible: { transition: { staggerChildren: 0.05, delayChildren: 0.6 } } }}
+          >
+            {"03. To be played".split("").map((c, i) => (
+               <motion.span key={i} variants={{ hidden: { opacity: 0 }, visible: { opacity: 1 } }}>
+                 {c === " " ? "\u00A0" : c}
+               </motion.span>
+            ))}
+          </motion.span>
+        </motion.p>
+        
         {/* Introduction */}
-        <div className="text-center w-full max-w-3xl pt-4">
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-4 text-white uppercase tracking-tighter break-words">
+        <div className="text-center w-full max-w-3xl">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-2 text-white uppercase tracking-tighter break-words">
             Games
           </h1>
         </div>
 
         {/* Beaver Delivery Section */}
         <div className="w-full flex flex-col items-center px-2 sm:px-8">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-8 font-mono tracking-tighter text-center uppercase break-words">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-6 font-mono tracking-tighter text-center uppercase break-words">
             <span className="text-[#64ffda]/40">[</span> Beaver Delivery <span className="text-[#64ffda]/40">]</span>
           </h2>
           <BeaverGame />

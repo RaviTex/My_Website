@@ -19,7 +19,7 @@ export default function About() {
         variants={containerVariants}
         initial="hidden"
         animate="visible"
-        className="m-auto flex flex-col items-start p-8 sm:p-12 backdrop-blur bg-[#0A0B10]/50 border border-white/10 rounded-3xl shadow-[0_0_40px_rgba(0,0,0,0.4)] max-w-3xl w-full sm:w-auto text-left"
+        className="m-auto flex flex-col items-start p-8 sm:p-12 backdrop-blur-md bg-[#0A0B10]/70 border border-white/10 rounded-3xl shadow-[0_0_40px_rgba(0,0,0,0.5)] max-w-3xl w-full sm:w-auto text-left"
       >
       <motion.p variants={itemVariants} className="text-[#64ffda] font-mono text-[14px] mb-4 tracking-wider uppercase flex justify-center w-full">
         <motion.span 
